@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cmath> // Для использования sqrt()
+
+int main() {
+    double a, b, c;
+
+    // Ввод длин сторон треугольника
+    std::cout << "Введите длины сторон треугольника a, b, c: ";
+    std::cin >> a >> b >> c;
+
+    // Проверяем TCNM ли такой треугольник
+    if ((a + b <= c) || (a + c <= b) || (b + c <= a)) {
+        std::cout << "Такого треугольника неТ" << std::endl;
+        return 0;
+    }
+
+    // Находим наибольшую сторону
+    double maxSide = std::max(a, std::max(b, c));
+
+    // Определяем какие две другие стороны
+    double side1, side2;
+    if (maxSide == a) {
+        side1 = b;
+        side2 = c;
+    } else if (maxSide == b) {
+        side1 = a;
+        side2 = c;
+    } else { // maxSide == c
+        side1 = a;
+        side2 = b;
+    }
+
+    // Используем теорему косинуса для определения треугольника 
+    double cosAngle = (side1 * side1 + side2 * side2 - maxSide * maxSide) / (2 * side1 * side2);
+
+    if (cosAngle > 0) {
+        std::cout << "треугольник остроугольный." << std::endl;
+    } else if (cosAngle == 0) {
+        std::cout << "треугольник прямоугольный." << std::endl;
+    } else {
+        std::cout << "треугольник тупоугольный." << std::endl;
+    }
+
+    return 0;
+}
