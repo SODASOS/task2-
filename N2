@@ -1,44 +1,33 @@
 #include <iostream>
-#include <cmath> // Для использования sqrt()
+#include <cmath> // это для функции pow
+
+using namespace std;
 
 int main() {
     double a, b, c;
 
-    // Ввод длин сторон треугольника
-    std::cout << "Введите длины сторон треугольника a, b, c: ";
-    std::cin >> a >> b >> c;
+    //  просит ввод длин сторон треугольника
+    cout << "ведите три стороны треугольника (a, b, c): ";
+    cin >> a >> b >> c;
 
-    // Проверяем TCNM ли такой треугольник
-    if ((a + b <= c) || (a + c <= b) || (b + c <= a)) {
-        std::cout << "Такого треугольника неТ" << std::endl;
-        return 0;
+    // проверка является ли это треугольником
+    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+        cout << "Это не треугольник" << endl;
+        return 0; // Завершаем программу если это не треугольник
     }
 
-    // Находим наибольшую сторону
-    double maxSide = std::max(a, std::max(b, c));
+    //  Вычисление квадратов сторон
+    double a2 = pow(a, 2);
+    double b2 = pow(b, 2);
+    double c2 = pow(c, 2);
 
-    // Определяем какие две другие стороны
-    double side1, side2;
-    if (maxSide == a) {
-        side1 = b;
-        side2 = c;
-    } else if (maxSide == b) {
-        side1 = a;
-        side2 = c;
-    } else { // maxSide == c
-        side1 = a;
-        side2 = b;
-    }
-
-    // Используем теорему косинуса для определения треугольника 
-    double cosAngle = (side1 * side1 + side2 * side2 - maxSide * maxSide) / (2 * side1 * side2);
-
-    if (cosAngle > 0) {
-        std::cout << "треугольник остроугольный." << std::endl;
-    } else if (cosAngle == 0) {
-        std::cout << "треугольник прямоугольный." << std::endl;
+    // определение типа треугольника по углам
+    if (a2 + b2 == c2 || a2 + c2 == b2 || b2 + c2 == a2) {
+        cout << "прямоугольный" << endl;
+    } else if (a2 + b2 < c2 || a2 + c2 < b2 || b2 + c2 < a2) {
+        cout << " тупоугольный" << endl;
     } else {
-        std::cout << "треугольник тупоугольный." << std::endl;
+        cout << "остроугольный" << endl;
     }
 
     return 0;
