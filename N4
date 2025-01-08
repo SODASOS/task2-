@@ -1,26 +1,32 @@
 #include <iostream>
+
 using namespace std;
 
-void checkTriangleSidesEquation(int a, int b, int c) {
-    if (a + b > c && a + c > b && b + c > a) {
-        int x = (a + c - b) / 2;
-        int y = (a + b - c) / 2;
-        int z = (b + c - a) / 2;
-        
-        if (x > 0 && y > 0 && z > 0) {
-            cout << "Стороны x, y, z подходят." << endl;
-        } else {
-            cout << "Стороны x, y, z не подходят." << endl;
-        }
-    } else {
-        cout << "Треугольник не существует." << endl;
-    }
-}
-
 int main() {
-    int a, b, c;
-    cout << "Введите длины сторон треугольника a, b, c: ";
+    double a, b, c;
+
+    //  ввод трех чисел
+    cout << "Введите три числа a b c: ";
     cin >> a >> b >> c;
-    checkTriangleSidesEquation(a, b, c);
+
+    //  Проверка на положительность
+    if (a <= 0 || b <= 0 || c <= 0) {
+        cout << "Числа должны быть положительными" << endl;
+        return 0; // Завершаем программу если  не положительные
+    }
+
+    //  Вычисление x y z по формулам
+    double x = (a + c - b) / 2.0;
+    double y = (a + b - c) / 2.0;
+    double z = (b + c - a) / 2.0;
+
+
+    // 4. Проверка  положительных x y z
+    if (x > 0 && y > 0 && z > 0) {
+        cout << "Числа a b c могут быть сторонами треугольника" << endl;
+    } else {
+        cout << "Числа a b c не могут быть сторонами треугольника" << endl;
+    }
+
     return 0;
 }
